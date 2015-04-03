@@ -8,4 +8,15 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="title_activity_create_reminder">CreateReminder</string>
+
+    <string name="datepicker">DatePicker</string>
+    <string name="timepicker">TimePicker</string>
+    <string name="dateLabel">Date</string>
+    <string name="defaultRepeatVal">Repeat None</string>
+
+    <string-array name="reminder_type">
+        <item>Task</item>
+        <item>Birthday</item>
+        <item>Payment</item>
+    </string-array>
 </resources>

@@ -3,11 +3,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/c_app_bar"
+        layout="@layout/app_bar" />
 
+    <EditText
+        style="@style/AxaForm"
+        android:drawableLeft="@drawable/ic_action_edit"
+        android:id="@+id/newReminderTitle" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create Reminder" />
+    <LinearLayout style="@style/AxaForm">
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="6"
+            android:editable="false"
+            android:id="@+id/newReminderDate" />
+
+        <ImageButton
+            android:id="@+id/btnDatePicker"
+            style="@style/AxaForm.Button"
+            android:src="@drawable/ic_action_go_to_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="3"
+            android:id="@+id/newReminderTime"
+            android:layout_gravity="right" />
+
+        <ImageButton
+            android:id="@+id/btnTimePicker"
+            style="@style/AxaForm.Button"
+            android:src="@drawable/ic_action_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin">
+
+        <ImageButton
+            android:id="@+id/repeatButton"
+            style="@style/ReccPickerButton"
+            android:gravity="center"
+            android:src="@drawable/ic_action_refresh" />
+
+        <TextView
+            android:id="@+id/repeatText"
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/defaultRepeatVal" />
+
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/remTypespinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

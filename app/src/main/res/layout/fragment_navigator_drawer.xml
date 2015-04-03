@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_drawer_title"
             android:background="@color/primaryColor"
-            android:padding="28dp"
+            android:padding="20dp"
             android:textStyle="bold" />
     </LinearLayout>
 
