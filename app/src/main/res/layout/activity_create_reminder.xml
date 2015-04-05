@@ -14,11 +14,17 @@
 
     <LinearLayout style="@style/AxaForm">
 
+        <TextView
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/dateTimeLabel" />
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:ems="6"
             android:editable="false"
             android:id="@+id/newReminderDate" />
 
@@ -33,7 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="time"
-            android:ems="3"
             android:id="@+id/newReminderTime"
             android:layout_gravity="right" />
 
@@ -51,6 +56,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin">
 
+        <TextView
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/remindLabel" />
+
         <ImageButton
             android:id="@+id/repeatButton"
             style="@style/ReccPickerButton"
@@ -58,7 +70,7 @@
             android:src="@drawable/ic_action_refresh" />
 
         <TextView
-            android:id="@+id/repeatText"
+            android:id="@+id/newReminderRecurrence"
             android:layout_marginLeft="@dimen/smallMargin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -67,8 +79,69 @@
 
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/remTypespinner"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin">
+
+        <TextView
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/typeLabel" />
+
+        <Spinner
+            android:id="@+id/remTypespinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/noteLabel" />
+
+        <EditText
+            android:id="@+id/newReminderNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin">
+
+        <TextView
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/alarmTypeLabel" />
+
+        <Spinner
+            android:id="@+id/newReminderAlarmType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/createBtnLabel"
+        android:id="@+id/createButton"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_gravity="right"
+        android:onClick="onClick" />
 </LinearLayout>

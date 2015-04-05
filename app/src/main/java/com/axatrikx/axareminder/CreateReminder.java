@@ -11,13 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
+import com.axatrikx.axareminder.model.Reminder;
+import com.axatrikx.axareminder.model.ReminderDataSource;
 import com.doomonafireball.betterpickers.recurrencepicker.EventRecurrence;
 import com.doomonafireball.betterpickers.recurrencepicker.EventRecurrenceFormatter;
 import com.doomonafireball.betterpickers.recurrencepicker.RecurrencePickerDialog;
@@ -40,7 +44,6 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
     private SimpleDateFormat timeFormat;
 
     private TextView repeatText;
-    private ImageButton repeatButton;
 
     private EventRecurrence mEventRecurrence = new EventRecurrence();
 
@@ -48,11 +51,15 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
 
     private String mRrule;
 
+    private ReminderDataSource dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_reminder);
+
+        dataSource = new ReminderDataSource(this);
+        dataSource.open();
 
         Toolbar toolBar = (Toolbar) findViewById(R.id.c_app_bar);
         setSupportActionBar(toolBar);
@@ -72,6 +79,16 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
         addRecPicker();
 
         addTypeSpinner();
+        addAlarmTypeSpinner();
+    }
+
+    private void addAlarmTypeSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.newReminderAlarmType);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.alarm_type, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
     private void addTypeSpinner() {
@@ -84,7 +101,8 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
     }
 
     private void addRecPicker() {
-        repeatText = (TextView) findViewById(R.id.repeatText);
+        ImageButton repeatButton;
+        repeatText = (TextView) findViewById(R.id.newReminderRecurrence);
         repeatButton = (ImageButton) findViewById(R.id.repeatButton);
 
         repeatButton.setOnClickListener(new View.OnClickListener() {
@@ -136,12 +154,10 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
     private void populateRepeats() {
 
         String repeatString = "";
-        boolean enabled;
         if (!TextUtils.isEmpty(mRrule)) {
             repeatString = EventRecurrenceFormatter.getRepeatString(this, getResources(), mEventRecurrence, true);
         }
-
-        repeatText.setText(mRrule + "\n" + repeatString);
+        repeatText.setText(repeatString);
     }
 
     @Override
@@ -179,6 +195,24 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
             case R.id.btnTimePicker:
                 TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getFragmentManager(), "timePicker");
                 break;
+            case R.id.createButton:
+                Toast.makeText(this, "Creating...", Toast.LENGTH_LONG).show();
+
+                Reminder rem = new Reminder();
+                rem.setReminderName(((EditText) findViewById(R.id.newReminderTitle)).getText().toString());
+                rem.setDate(((EditText) findViewById(R.id.newReminderDate)).getText().toString());
+                rem.setTime(((EditText) findViewById(R.id.newReminderTime)).getText().toString());
+                rem.setRecurrence(((TextView) findViewById(R.id.newReminderRecurrence)).getText().toString());
+                rem.setType(((Spinner) findViewById(R.id.remTypespinner)).getSelectedItem().toString());
+                rem.setNote(((EditText) findViewById(R.id.newReminderNote)).getText().toString());
+                rem.setAlarmType(((Spinner) findViewById(R.id.newReminderAlarmType)).getSelectedItem().toString());
+
+                System.out.println("Start");
+                dataSource.createReminder(rem);
+
+                System.out.println("End");
+                Toast.makeText(this, "Created!!", Toast.LENGTH_LONG).show();
+                break;
         }
     }
 
@@ -203,7 +237,7 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        Toast.makeText(this, "Hello.. you selected " + view.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
