@@ -1,6 +1,8 @@
 package com.axatrikx.axareminder;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -34,7 +36,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-public class CreateReminder extends ActionBarActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
+public class CreateReminder extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
         RecurrencePickerDialog.OnRecurrenceSetListener, AdapterView.OnItemSelectedListener {
 
     private static final String TIME_PATTERN = "HH:mm";
@@ -63,18 +65,16 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
         dataSource = new ReminderDataSource(this);
         dataSource.open();
 
-        Toolbar toolBar = (Toolbar) findViewById(R.id.c_app_bar);
-        setSupportActionBar(toolBar);
-
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         calendar = Calendar.getInstance();
         dateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault());
         timeFormat = new SimpleDateFormat(TIME_PATTERN, Locale.getDefault());
 
         newReminderDate = (TextView) findViewById(R.id.newReminderDate);
+        newReminderDate.setFocusable(false);
+        newReminderDate.setClickable(true);
         newReminderTime = (TextView) findViewById(R.id.newReminderTime);
+        newReminderTime.setFocusable(false);
+        newReminderTime.setClickable(true);
 
         update();
 
@@ -191,10 +191,10 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnDatePicker:
+            case R.id.newReminderDate:
                 DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
                 break;
-            case R.id.btnTimePicker:
+            case R.id.newReminderTime:
                 TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getFragmentManager(), "timePicker");
                 break;
             case R.id.createButton:
@@ -207,10 +207,8 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
                 rem.setNote(((EditText) findViewById(R.id.newReminderNote)).getText().toString());
                 rem.setAlarmType(((Spinner) findViewById(R.id.newReminderAlarmType)).getSelectedItem().toString());
 
-                System.out.println("Start");
                 Reminder newRem = dataSource.createReminder(rem);
 
-                System.out.println("End");
                 if (newRem != null) {
                     finish();
                 }
@@ -242,7 +240,7 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Hello.. you selected " + view.toString(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Hello.. you selected " + view.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

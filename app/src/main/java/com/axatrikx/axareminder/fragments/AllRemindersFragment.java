@@ -121,12 +121,11 @@ public class AllRemindersFragment extends Fragment implements ReminderAdapter.Cl
             view.findViewById(R.id.reminder_date).setVisibility(View.GONE);
             view.findViewById(R.id.reminder_time).setVisibility(View.GONE);
         }
-        Toast.makeText(getActivity(), "Clicked " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void itemOpened(View view, int position) {
-        Toast.makeText(getActivity(), "Selected " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Selected " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -1,147 +1,150 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <include
-        android:id="@+id/c_app_bar"
-        layout="@layout/app_bar" />
-
-    <EditText
-        style="@style/AxaForm"
-        android:drawableLeft="@drawable/ic_action_edit"
-        android:id="@+id/newReminderTitle" />
-
-    <LinearLayout style="@style/AxaForm">
-
-        <TextView
-            android:layout_marginLeft="@dimen/smallMargin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/dateTimeLabel" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:editable="false"
-            android:id="@+id/newReminderDate" />
-
-        <ImageButton
-            android:id="@+id/btnDatePicker"
-            style="@style/AxaForm.Button"
-            android:src="@drawable/ic_action_go_to_today"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="time"
-            android:id="@+id/newReminderTime"
-            android:layout_gravity="right" />
-
-        <ImageButton
-            android:id="@+id/btnTimePicker"
-            style="@style/AxaForm.Button"
-            android:src="@drawable/ic_action_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+    android:background="#0000">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin">
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_margin="3dp">
 
-        <TextView
-            android:layout_marginLeft="@dimen/smallMargin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/remindLabel" />
+        <EditText
+            style="@style/AxaForm"
+            android:drawableLeft="@drawable/ic_action_edit"
+            android:id="@+id/newReminderTitle" />
 
-        <ImageButton
-            android:id="@+id/repeatButton"
-            style="@style/ReccPickerButton"
-            android:gravity="center"
-            android:src="@drawable/ic_action_refresh" />
+        <LinearLayout style="@style/AxaForm">
 
-        <TextView
-            android:id="@+id/newReminderRecurrence"
-            android:layout_marginLeft="@dimen/smallMargin"
+            <TextView
+                android:layout_marginLeft="@dimen/smallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/dateTimeLabel" />
+
+            <EditText
+                android:layout_margin="@dimen/smallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:onClick="onClick"
+                android:editable="false"
+                android:id="@+id/newReminderDate" />
+
+            <TextView
+                android:layout_margin="@dimen/smallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/atString" />
+
+            <EditText
+                android:layout_margin="@dimen/smallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:editable="false"
+                android:onClick="onClick"
+                android:id="@+id/newReminderTime"
+                android:layout_gravity="right" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/defaultRepeatVal" />
+            android:layout_margin="@dimen/margin">
 
-    </LinearLayout>
+            <TextView
+                android:layout_marginLeft="@dimen/smallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/remindLabel" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin">
+            <ImageButton
+                android:id="@+id/repeatButton"
+                style="@style/ReccPickerButton"
+                android:gravity="center"
+                android:src="@drawable/ic_action_refresh" />
 
-        <TextView
-            android:layout_marginLeft="@dimen/smallMargin"
+            <TextView
+                android:id="@+id/newReminderRecurrence"
+                android:layout_marginLeft="@dimen/smallMargin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/defaultRepeatVal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin">
+
+            <TextView
+                android:layout_marginLeft="@dimen/smallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/typeLabel" />
+
+            <Spinner
+                android:id="@+id/remTypespinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginLeft="@dimen/smallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/noteLabel" />
+
+            <EditText
+                android:id="@+id/newReminderNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin">
+
+            <TextView
+                android:layout_marginLeft="@dimen/smallMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/alarmTypeLabel" />
+
+            <Spinner
+                android:id="@+id/newReminderAlarmType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/typeLabel" />
-
-        <Spinner
-            android:id="@+id/remTypespinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+            android:text="@string/createBtnLabel"
+            android:id="@+id/createButton"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_gravity="right"
+            android:onClick="onClick" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_marginLeft="@dimen/smallMargin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/noteLabel" />
-
-        <EditText
-            android:id="@+id/newReminderNote"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin">
-
-        <TextView
-            android:layout_marginLeft="@dimen/smallMargin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/alarmTypeLabel" />
-
-        <Spinner
-            android:id="@+id/newReminderAlarmType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/createBtnLabel"
-        android:id="@+id/createButton"
-        android:layout_marginRight="@dimen/margin"
-        android:layout_gravity="right"
-        android:onClick="onClick" />
-</LinearLayout>
+</RelativeLayout>

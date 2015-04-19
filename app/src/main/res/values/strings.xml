@@ -19,6 +19,7 @@
     <string name="remindLabel">Repeat</string>
     <string name="alarmTypeLabel">Alarm Type</string>
     <string name="createBtnLabel">Create</string>
+    <string name="atString">\@</string>
 
     <string-array name="reminder_type">
         <item>Task</item>
