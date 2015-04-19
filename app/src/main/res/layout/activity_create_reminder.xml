@@ -13,69 +13,69 @@
 
         <EditText
             style="@style/AxaForm"
-            android:drawableLeft="@drawable/ic_action_edit"
-            android:id="@+id/newReminderTitle" />
+            android:drawableEnd="@drawable/ic_action_edit"
+            android:hint="@string/titleHint"
+            android:id="@+id/newReminderTitle"
+            android:layout_marginStart="@dimen/smallMargin"
+            android:layout_marginTop="@dimen/smallMargin" />
 
-        <LinearLayout style="@style/AxaForm">
+        <TextView
+            android:layout_marginStart="@dimen/smallMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMargin"
+            android:layout_gravity="start"
+            android:text="@string/dateTimeLabel" />
+
+        <RelativeLayout
+            style="@style/AxaForm"
+            android:layout_marginStart="@dimen/smallMargin">
+
+            <ImageView
+                style="@style/RefIcon"
+                android:id="@+id/remindIcon"
+                android:src="@drawable/ic_action_time" />
 
             <TextView
-                android:layout_marginLeft="@dimen/smallMargin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/dateTimeLabel" />
-
-            <EditText
                 android:layout_margin="@dimen/smallMargin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="date"
+                android:layout_toEndOf="@id/remindIcon"
+                android:text="January 1, 2001"
                 android:onClick="onClick"
-                android:editable="false"
+                android:layout_centerVertical="true"
                 android:id="@+id/newReminderDate" />
 
             <TextView
                 android:layout_margin="@dimen/smallMargin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/atString" />
-
-            <EditText
-                android:layout_margin="@dimen/smallMargin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="time"
-                android:editable="false"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
                 android:onClick="onClick"
-                android:id="@+id/newReminderTime"
-                android:layout_gravity="right" />
+                android:text="00:00"
+                android:id="@+id/newReminderTime" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin">
+            android:layout_marginStart="@dimen/smallMargin">
 
-            <TextView
-                android:layout_marginLeft="@dimen/smallMargin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/remindLabel" />
 
             <ImageButton
+                style="@style/RefIcon"
                 android:id="@+id/repeatButton"
-                style="@style/ReccPickerButton"
                 android:gravity="center"
                 android:src="@drawable/ic_action_refresh" />
 
             <TextView
                 android:id="@+id/newReminderRecurrence"
-                android:layout_marginLeft="@dimen/smallMargin"
+                android:layout_marginStart="@dimen/smallMargin"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClick"
                 android:layout_gravity="center"
                 android:text="@string/defaultRepeatVal" />
 
@@ -84,56 +84,75 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin">
+            android:layout_marginStart="@dimen/smallMargin"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_marginLeft="@dimen/smallMargin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                style="@style/RefIcon"
+                android:id="@+id/noteIcon"
                 android:layout_gravity="center"
-                android:text="@string/typeLabel" />
-
-            <Spinner
-                android:id="@+id/remTypespinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginLeft="@dimen/smallMargin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/noteLabel" />
+                android:src="@drawable/ic_action_view_as_list" />
 
             <EditText
                 android:id="@+id/newReminderNote"
+                style="@style/AxaForm"
+                android:layout_marginEnd="@dimen/smallMargin"
                 android:layout_width="match_parent"
+                android:hint="@string/noteHint"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
+
+        <TextView
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alarmTypeLabel" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin">
+            android:layout_marginStart="@dimen/smallMargin">
 
-            <TextView
-                android:layout_marginLeft="@dimen/smallMargin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                style="@style/RefIcon"
+                android:id="@+id/alarmIcon"
                 android:layout_gravity="center"
-                android:text="@string/alarmTypeLabel" />
+                android:src="@drawable/ic_action_alarms" />
 
             <Spinner
                 android:id="@+id/newReminderAlarmType"
-                android:layout_width="wrap_content"
+                android:layout_marginEnd="@dimen/smallMargin"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/typeLabel" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/smallMargin">
+
+            <ImageView
+                style="@style/RefIcon"
+                android:id="@+id/typeIcon"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_action_labels" />
+
+            <Spinner
+                android:id="@+id/remTypespinner"
+                android:layout_marginEnd="@dimen/smallMargin"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>

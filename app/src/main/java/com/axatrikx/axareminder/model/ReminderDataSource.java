@@ -61,8 +61,7 @@ public class ReminderDataSource {
         return newReminder;
     }
 
-    public void deleteReminder(Reminder rem) {
-        long id = rem.getId();
+    public void deleteReminder(long id) {
         database.delete(ReminderDBHelper.TABLE_REM, ReminderDBHelper.COLUMN_ID
                 + " = " + id, null);
     }

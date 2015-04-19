@@ -27,7 +27,14 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/margin</item>
+    </style>
+
+    <style name="RefIcon">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/smallMargin</item>
+        <item name="android:background">@null</item>
     </style>
 
     <style name="AxaForm.Item">
@@ -48,10 +55,4 @@
         <item name="android:layout_margin">@dimen/smallMargin</item>
     </style>
 
-    <style name="ReccPickerButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:onClick">onClick</item>
-        <item name="android:background">@null</item>
-    </style>
 </resources>

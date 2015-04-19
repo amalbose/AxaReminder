@@ -70,16 +70,15 @@ public class AllRemindersFragment extends Fragment implements ReminderAdapter.Cl
 
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
-//                                for (int position : reverseSortedPositions) {
-//                                    data.remove(position);
-//                                    mAdapter.notifyItemRemoved(position);
-//                                }
-//                                mAdapter.notifyDataSetChanged();
                             }
 
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
+                                    ReminderDataSource dataSource = new ReminderDataSource(getActivity());
+                                    dataSource.open();
+                                    dataSource.deleteReminder(data.get(position).getId());
+                                    dataSource.close();
                                     data.remove(position);
                                     mAdapter.notifyItemRemoved(position);
                                 }

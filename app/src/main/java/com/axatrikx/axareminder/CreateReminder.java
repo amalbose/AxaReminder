@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,11 +71,11 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
         timeFormat = new SimpleDateFormat(TIME_PATTERN, Locale.getDefault());
 
         newReminderDate = (TextView) findViewById(R.id.newReminderDate);
-        newReminderDate.setFocusable(false);
-        newReminderDate.setClickable(true);
+//        newReminderDate.setFocusable(false);
+//        newReminderDate.setClickable(true);
         newReminderTime = (TextView) findViewById(R.id.newReminderTime);
-        newReminderTime.setFocusable(false);
-        newReminderTime.setClickable(true);
+//        newReminderTime.setFocusable(false);
+//        newReminderTime.setClickable(true);
 
         update();
 
@@ -103,11 +104,11 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
     }
 
     private void addRecPicker() {
-        ImageButton repeatButton;
+        TextView newReminderRecurrence;
         repeatText = (TextView) findViewById(R.id.newReminderRecurrence);
-        repeatButton = (ImageButton) findViewById(R.id.repeatButton);
+        newReminderRecurrence = (TextView) findViewById(R.id.newReminderRecurrence);
 
-        repeatButton.setOnClickListener(new View.OnClickListener() {
+        newReminderRecurrence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getSupportFragmentManager();
@@ -200,8 +201,8 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
             case R.id.createButton:
                 Reminder rem = new Reminder();
                 rem.setReminderName(((EditText) findViewById(R.id.newReminderTitle)).getText().toString());
-                rem.setDate(((EditText) findViewById(R.id.newReminderDate)).getText().toString());
-                rem.setTime(((EditText) findViewById(R.id.newReminderTime)).getText().toString());
+                rem.setDate(((TextView) findViewById(R.id.newReminderDate)).getText().toString());
+                rem.setTime(((TextView) findViewById(R.id.newReminderTime)).getText().toString());
                 rem.setRecurrence(((TextView) findViewById(R.id.newReminderRecurrence)).getText().toString());
                 rem.setType(((Spinner) findViewById(R.id.remTypespinner)).getSelectedItem().toString());
                 rem.setNote(((EditText) findViewById(R.id.newReminderNote)).getText().toString());
