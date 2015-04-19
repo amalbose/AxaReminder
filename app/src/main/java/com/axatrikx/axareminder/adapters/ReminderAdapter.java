@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.axatrikx.axareminder.R;
@@ -43,7 +42,11 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.AxaRem
         axaRemViewHolder.name.setText(curRem.getReminderName());
         axaRemViewHolder.date.setText(curRem.getDate());
         axaRemViewHolder.time.setText(curRem.getTime());
-        axaRemViewHolder.reccurence.setText(curRem.getRecurrence());
+        axaRemViewHolder.recurrence.setText(curRem.getRecurrence());
+    }
+
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListner = clickListener;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.AxaRem
         TextView name;
         TextView date;
         TextView time;
-        TextView reccurence;
+        TextView recurrence;
 
         Context context;
 
@@ -66,15 +69,19 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.AxaRem
             name = (TextView) itemView.findViewById(R.id.reminder_name);
             date = (TextView) itemView.findViewById(R.id.reminder_date);
             time = (TextView) itemView.findViewById(R.id.reminder_time);
-            reccurence = (TextView) itemView.findViewById(R.id.reminder_recc);
+            recurrence = (TextView) itemView.findViewById(R.id.reminder_recc);
             itemView.findViewById(R.id.reminder_row).setOnClickListener(this);
+            itemView.findViewById(R.id.row_detail).setOnClickListener(this);
 //            title.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (clickListner != null) {
-                clickListner.itemClicked(v, getPosition());
+                if(v.getId() == R.id.row_detail)
+                    clickListner.itemOpened(v, getPosition());
+                else
+                    clickListner.itemClicked(v, getPosition());
             }
         }
 
@@ -82,5 +89,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.AxaRem
 
     public interface ClickListener {
         public void itemClicked(View view, int position);
+        public void itemOpened(View view, int position);
     }
 }

@@ -94,8 +94,6 @@ public class ReminderDataSource {
         reminder.setNote(cursor.getString(5));
         reminder.setType(cursor.getString(6));
         reminder.setAlarmType(cursor.getString(7));
-        System.out.println("Got result");
-        System.out.println(reminder);
         return reminder;
     }
 }

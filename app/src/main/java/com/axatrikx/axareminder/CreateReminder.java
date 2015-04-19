@@ -1,6 +1,8 @@
 package com.axatrikx.axareminder;
 
+import android.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -196,8 +198,6 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
                 TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getFragmentManager(), "timePicker");
                 break;
             case R.id.createButton:
-                Toast.makeText(this, "Creating...", Toast.LENGTH_LONG).show();
-
                 Reminder rem = new Reminder();
                 rem.setReminderName(((EditText) findViewById(R.id.newReminderTitle)).getText().toString());
                 rem.setDate(((EditText) findViewById(R.id.newReminderDate)).getText().toString());
@@ -208,10 +208,15 @@ public class CreateReminder extends ActionBarActivity implements DatePickerDialo
                 rem.setAlarmType(((Spinner) findViewById(R.id.newReminderAlarmType)).getSelectedItem().toString());
 
                 System.out.println("Start");
-                dataSource.createReminder(rem);
+                Reminder newRem = dataSource.createReminder(rem);
 
                 System.out.println("End");
-                Toast.makeText(this, "Created!!", Toast.LENGTH_LONG).show();
+                if (newRem != null) {
+                    finish();
+                }
+                else
+                    Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
+
                 break;
         }
     }

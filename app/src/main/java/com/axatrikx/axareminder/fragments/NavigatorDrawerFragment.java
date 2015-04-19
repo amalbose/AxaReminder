@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.axatrikx.axareminder.R;
 import com.axatrikx.axareminder.common.Utils;
@@ -67,7 +68,6 @@ public class NavigatorDrawerFragment extends Fragment implements NavDrawerAdapte
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return layout;
     }
-
 
     public void setUp(int fragment_id, DrawerLayout drwrLayout, final Toolbar toolbar) {
         containerView = getActivity().findViewById(fragment_id);
@@ -142,7 +142,9 @@ public class NavigatorDrawerFragment extends Fragment implements NavDrawerAdapte
                 .replace(R.id.content_fragment, fragment)
                 .commit();
 
-        fragmentManager.findFragmentById(R.id.content_fragment).getView().setBackgroundColor(Color.WHITE);
+        Fragment fgmt = fragmentManager.findFragmentById(R.id.content_fragment);
+        if (fgmt != null && fgmt.getView() != null)
+            fgmt.getView().setBackgroundColor(Color.WHITE);
 
         drawerLayout.closeDrawers();
     }
