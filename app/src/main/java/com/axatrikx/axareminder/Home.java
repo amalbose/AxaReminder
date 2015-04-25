@@ -36,8 +36,7 @@ public class Home extends ActionBarActivity {
                 .findFragmentById(R.id.fragment_nav_drawer);
 
         drawerFrag.setUp(R.id.fragment_nav_drawer, (DrawerLayout) findViewById(R.id.drawerLayout),toolBar);
-        initActionButtons();
-        Log.d("ABC", "created");
+
     }
 
     @Override
@@ -61,17 +60,6 @@ public class Home extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void initActionButtons() {
-        ActionButton actionButton = (ActionButton) findViewById(R.id.action_button);
-        actionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent createReminderIntent = new Intent(v.getContext(),CreateReminder.class);
-                startActivity(createReminderIntent);
-            }
-        });
     }
 
 }

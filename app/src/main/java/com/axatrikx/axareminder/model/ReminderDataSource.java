@@ -61,8 +61,21 @@ public class ReminderDataSource {
         return newReminder;
     }
 
-    public void deleteReminder(Reminder rem) {
-        long id = rem.getId();
+    public int updateReminder(Reminder reminder) {
+        ContentValues values = new ContentValues();
+        values.put(ReminderDBHelper.COLUMN_NAME, reminder.getReminderName());
+        values.put(ReminderDBHelper.COLUMN_DATE, reminder.getDate());
+        values.put(ReminderDBHelper.COLUMN_TIME, reminder.getTime());
+        if (reminder.getRecurrence() != null)
+            values.put(ReminderDBHelper.COLUMN_RECURRENCE, reminder.getRecurrence());
+        if (reminder.getNote() != null)
+            values.put(ReminderDBHelper.COLUMN_NOTE, reminder.getNote());
+        values.put(ReminderDBHelper.COLUMN_TYPE, reminder.getType());
+        values.put(ReminderDBHelper.COLUMN_ALARMTYPE, reminder.getAlarmType());
+        return database.update(ReminderDBHelper.TABLE_REM,values,  ReminderDBHelper.COLUMN_ID +" = ?", new String[]{String.valueOf(reminder.getId())});
+    }
+
+    public void deleteReminder(long id) {
         database.delete(ReminderDBHelper.TABLE_REM, ReminderDBHelper.COLUMN_ID
                 + " = " + id, null);
     }
@@ -94,8 +107,6 @@ public class ReminderDataSource {
         reminder.setNote(cursor.getString(5));
         reminder.setType(cursor.getString(6));
         reminder.setAlarmType(cursor.getString(7));
-        System.out.println("Got result");
-        System.out.println(reminder);
         return reminder;
     }
 }

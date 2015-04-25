@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.axatrikx.axareminder.R;
 import com.axatrikx.axareminder.model.Reminder;
+import com.axatrikx.axareminder.model.ReminderTypes;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,11 +25,11 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.AxaN
     private LayoutInflater inflator;
 
     //TODO Change Reminder to another data type for data.
-    List<Reminder> data = Collections.emptyList();
+    List<ReminderTypes> data = Collections.emptyList();
     private Context context;
     private ClickListener clickListner;
 
-    public NavDrawerAdapter(Context context, List<Reminder> data) {
+    public NavDrawerAdapter(Context context, List<ReminderTypes> data) {
         inflator = LayoutInflater.from(context);
         this.data = data;
         this.context = context;
@@ -42,8 +43,8 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.AxaN
 
     @Override
     public void onBindViewHolder(AxaNavViewHolder axaNavViewHolder, int position) {
-        Reminder curRem = data.get(position);
-        axaNavViewHolder.title.setText(curRem.getReminderName());
+        ReminderTypes curRem = data.get(position);
+        axaNavViewHolder.title.setText(curRem.getName());
         axaNavViewHolder.icon.setImageResource(curRem.getIconId());
     }
 

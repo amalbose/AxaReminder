@@ -1,5 +1,6 @@
 package com.axatrikx.axareminder;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
+import com.axatrikx.axareminder.common.Utils;
 import com.axatrikx.axareminder.model.Reminder;
 import com.axatrikx.axareminder.model.ReminderDataSource;
 import com.doomonafireball.betterpickers.recurrencepicker.EventRecurrence;
@@ -30,10 +32,11 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-public class CreateReminder extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
+public class EditReminder extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
         RecurrencePickerDialog.OnRecurrenceSetListener, AdapterView.OnItemSelectedListener {
 
     private static final String TIME_PATTERN = "HH:mm";
+    public static final String REMINDER_KEY = "REMINDER_KEY";
 
     private TextView newReminderDate;
     private TextView newReminderTime;
@@ -48,13 +51,14 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
     private static final String FRAG_TAG_RECUR_PICKER = "recurrencePickerDialogFragment";
 
     private String mRrule;
+    private long reminderId;
 
     private ReminderDataSource dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_reminder);
+        setContentView(R.layout.activity_edit_reminder);
 
         dataSource = new ReminderDataSource(this);
         dataSource.open();
@@ -76,7 +80,10 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
 
         addTypeSpinner();
         addAlarmTypeSpinner();
+
+        fillInValues();
     }
+
 
     private void addAlarmTypeSpinner() {
         Spinner spinner = (Spinner) findViewById(R.id.newReminderAlarmType);
@@ -121,10 +128,26 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
                 }
                 rpd = new RecurrencePickerDialog();
                 rpd.setArguments(b);
-                rpd.setOnRecurrenceSetListener(CreateReminder.this);
+                rpd.setOnRecurrenceSetListener(EditReminder.this);
                 rpd.show(fm, FRAG_TAG_RECUR_PICKER);
             }
         });
+    }
+
+    private void fillInValues() {
+        Intent intent = getIntent();
+        Reminder rem = (Reminder) intent.getParcelableExtra(REMINDER_KEY);
+        reminderId = rem.getId();
+        ((EditText)findViewById(R.id.newReminderTitle)).setText(rem.getReminderName());
+        ((TextView)findViewById(R.id.newReminderDate)).setText(rem.getDate());
+        ((TextView)findViewById(R.id.newReminderTime)).setText(rem.getTime());
+        ((TextView)findViewById(R.id.newReminderRecurrence)).setText(rem.getRecurrence());
+        ((EditText)findViewById(R.id.newReminderNote)).setText(rem.getNote());
+        Spinner remType =  ((Spinner) findViewById(R.id.remTypespinner));
+        remType.setSelection(Utils.getSpinnerIndex(remType, rem.getType()));
+        Spinner alaType =  ((Spinner) findViewById(R.id.newReminderAlarmType));
+        alaType.setSelection(Utils.getSpinnerIndex(alaType,rem.getAlarmType()));
+
     }
 
     @Override
@@ -159,7 +182,7 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_create_reminder, menu);
+        getMenuInflater().inflate(R.menu.menu_edit_reminder, menu);
         return true;
     }
 
@@ -191,8 +214,9 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
             case R.id.newReminderTime:
                 TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getFragmentManager(), "timePicker");
                 break;
-            case R.id.createButton:
+            case R.id.editSaveBtn:
                 Reminder rem = new Reminder();
+                rem.setId(reminderId);
                 rem.setReminderName(((EditText) findViewById(R.id.newReminderTitle)).getText().toString());
                 rem.setDate(((TextView) findViewById(R.id.newReminderDate)).getText().toString());
                 rem.setTime(((TextView) findViewById(R.id.newReminderTime)).getText().toString());
@@ -201,12 +225,11 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
                 rem.setNote(((EditText) findViewById(R.id.newReminderNote)).getText().toString());
                 rem.setAlarmType(((Spinner) findViewById(R.id.newReminderAlarmType)).getSelectedItem().toString());
 
-                Reminder newRem = dataSource.createReminder(rem);
+                int nowOfRowsAffected = dataSource.updateReminder(rem);
 
-                if (newRem != null) {
+                if (nowOfRowsAffected > 0) {
                     finish();
-                }
-                else
+                } else
                     Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
 
                 break;
