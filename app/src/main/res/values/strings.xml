@@ -35,4 +35,6 @@
         <item>Puzzle</item>
         <item>Math</item>
     </string-array>
+    <string name="title_activity_edit_reminder">EditReminder</string>
+    <string name="editSaveBtn">Save</string>
 </resources>

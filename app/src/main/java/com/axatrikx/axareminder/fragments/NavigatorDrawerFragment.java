@@ -20,6 +20,7 @@ import com.axatrikx.axareminder.R;
 import com.axatrikx.axareminder.common.Utils;
 import com.axatrikx.axareminder.model.Reminder;
 import com.axatrikx.axareminder.adapters.NavDrawerAdapter;
+import com.axatrikx.axareminder.model.ReminderTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,14 +105,14 @@ public class NavigatorDrawerFragment extends Fragment implements NavDrawerAdapte
         });
     }
 
-    public static List<Reminder> getAppDrawerData() {
-        List<Reminder> data = new ArrayList<Reminder>();
+    public static List<ReminderTypes> getAppDrawerData() {
+        List<ReminderTypes> data = new ArrayList<ReminderTypes>();
         String[] titles = {"Home", "All Reminders", "Birthdays", "Settings"};
-        Reminder rem;
+        ReminderTypes rem;
         for (String title : titles) {
-            rem = new Reminder();
+            rem = new ReminderTypes();
             rem.setIconId(R.drawable.ic_launcher);
-            rem.setReminderName(title);
+            rem.setName(title);
             data.add(rem);
         }
         return data;

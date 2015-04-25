@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.axatrikx.axareminder.CreateReminder;
+import com.axatrikx.axareminder.EditReminder;
 import com.axatrikx.axareminder.R;
 import com.axatrikx.axareminder.adapters.ReminderAdapter;
 import com.axatrikx.axareminder.extlib.SwipeableRecyclerViewTouchListener;
@@ -28,6 +29,7 @@ import java.util.List;
 public class AllRemindersFragment extends Fragment implements ReminderAdapter.ClickListener {
 
     private static final int CREATE_REMINDER_REQUEST = 1;
+    private static final int UPDATE_REMINDER_REQUEST = 2;
     private RecyclerView mRecyclerView;
     private ReminderAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -125,6 +127,9 @@ public class AllRemindersFragment extends Fragment implements ReminderAdapter.Cl
     @Override
     public void itemOpened(View view, int position) {
 //        Toast.makeText(getActivity(), "Selected " + position, Toast.LENGTH_SHORT).show();
+        Intent editReminderIntent = new Intent(view.getContext(), EditReminder.class);
+        editReminderIntent.putExtra(EditReminder.REMINDER_KEY,data.get(position));
+        startActivityForResult(editReminderIntent, UPDATE_REMINDER_REQUEST);
     }
 
     @Override
@@ -142,6 +147,21 @@ public class AllRemindersFragment extends Fragment implements ReminderAdapter.Cl
             mAdapter.notifyItemInserted(this.data.size());
             mAdapter.notifyDataSetChanged();
 
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(this);
+            ft.attach(this);
+            ft.commit();
+        } else if (requestCode == UPDATE_REMINDER_REQUEST) {
+            // TODO return Reminder object
+            // Make sure the request was successful
+//            if (resultCode == RESULT_OK) {
+//                // The user picked a contact.
+//                // The Intent's data Uri identifies which contact was selected.
+//
+//                // Do something with the contact here (bigger example below)
+//            }
+            getData();
+            mAdapter.notifyDataSetChanged();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.detach(this);
             ft.attach(this);
