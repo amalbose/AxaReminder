@@ -3,6 +3,8 @@ package com.axatrikx.axareminder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.format.Time;
 import android.view.Menu;
@@ -30,7 +32,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-public class CreateReminder extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
+public class CreateReminder extends ActionBarActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
         RecurrencePickerDialog.OnRecurrenceSetListener, AdapterView.OnItemSelectedListener {
 
     private static final String TIME_PATTERN = "HH:mm";
@@ -55,6 +57,12 @@ public class CreateReminder extends FragmentActivity implements DatePickerDialog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_reminder);
+
+        Toolbar toolBar = (Toolbar) findViewById(R.id.c_app_bar);
+        setSupportActionBar(toolBar);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dataSource = new ReminderDataSource(this);
         dataSource.open();

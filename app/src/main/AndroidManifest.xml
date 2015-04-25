@@ -14,26 +14,19 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".CreateReminder"
-            android:configChanges="orientation|keyboardHidden"
-            android:label="@string/title_activity_create_reminder"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppPopUpTheme">
+            android:label="@string/title_activity_create_reminder">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
         <activity
             android:name=".EditReminder"
-            android:label="@string/title_activity_edit_reminder"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@style/AppPopUpTheme">
+            android:label="@string/title_activity_edit_reminder">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />

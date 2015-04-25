@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.format.Time;
 import android.view.Menu;
@@ -32,7 +34,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-public class EditReminder extends FragmentActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
+public class EditReminder extends ActionBarActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
         RecurrencePickerDialog.OnRecurrenceSetListener, AdapterView.OnItemSelectedListener {
 
     private static final String TIME_PATTERN = "HH:mm";
@@ -59,6 +61,12 @@ public class EditReminder extends FragmentActivity implements DatePickerDialog.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_reminder);
+
+        Toolbar toolBar = (Toolbar) findViewById(R.id.e_app_bar);
+        setSupportActionBar(toolBar);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dataSource = new ReminderDataSource(this);
         dataSource.open();
