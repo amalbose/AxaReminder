@@ -6,6 +6,7 @@
     tools:context="com.axatrikx.axareminder.fragments.UpcomingReminders">
 
     <TextView
+        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/app_drawer_title" />

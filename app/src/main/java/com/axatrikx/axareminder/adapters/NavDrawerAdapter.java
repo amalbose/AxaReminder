@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.axatrikx.axareminder.R;
 import com.axatrikx.axareminder.model.Reminder;
+import com.axatrikx.axareminder.model.ReminderTypes;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,31 +20,32 @@ import java.util.List;
  * Reminder Nav Drawer Adapter
  * Created by amalbose on 3/21/2015.
  */
-public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.AxaRemViewHolder> {
+public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.AxaNavViewHolder> {
 
     private LayoutInflater inflator;
 
-    List<Reminder> data = Collections.emptyList();
+    //TODO Change Reminder to another data type for data.
+    List<ReminderTypes> data = Collections.emptyList();
     private Context context;
     private ClickListener clickListner;
 
-    public NavDrawerAdapter(Context context, List<Reminder> data) {
+    public NavDrawerAdapter(Context context, List<ReminderTypes> data) {
         inflator = LayoutInflater.from(context);
         this.data = data;
         this.context = context;
     }
 
     @Override
-    public AxaRemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AxaNavViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflator.inflate(R.layout.nav_drawer_row, parent, false);
-        return new AxaRemViewHolder(context, view);
+        return new AxaNavViewHolder(context, view);
     }
 
     @Override
-    public void onBindViewHolder(AxaRemViewHolder axaRemViewHolder, int position) {
-        Reminder curRem = data.get(position);
-        axaRemViewHolder.title.setText(curRem.getReminderName());
-        axaRemViewHolder.icon.setImageResource(curRem.getIconId());
+    public void onBindViewHolder(AxaNavViewHolder axaNavViewHolder, int position) {
+        ReminderTypes curRem = data.get(position);
+        axaNavViewHolder.title.setText(curRem.getName());
+        axaNavViewHolder.icon.setImageResource(curRem.getIconId());
     }
 
     @Override
@@ -56,13 +57,13 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<NavDrawerAdapter.AxaR
         this.clickListner = clickListener;
     }
 
-    class AxaRemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class AxaNavViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;
         ImageView icon;
         Context context;
 
-        public AxaRemViewHolder(Context context, View itemView) {
+        public AxaNavViewHolder(Context context, View itemView) {
             super(itemView);
             this.context = context;
             title = (TextView) itemView.findViewById(R.id.nav_drawer_txt);

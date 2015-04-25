@@ -1,16 +1,20 @@
 package com.axatrikx.axareminder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.axatrikx.axareminder.fragments.NavigatorDrawerFragment;
+import com.software.shell.fab.ActionButton;
 
 
 public class Home extends ActionBarActivity {
@@ -32,8 +36,8 @@ public class Home extends ActionBarActivity {
                 .findFragmentById(R.id.fragment_nav_drawer);
 
         drawerFrag.setUp(R.id.fragment_nav_drawer, (DrawerLayout) findViewById(R.id.drawerLayout),toolBar);
-    }
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,4 +61,5 @@ public class Home extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

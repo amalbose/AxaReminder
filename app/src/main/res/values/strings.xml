@@ -8,4 +8,33 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="title_activity_create_reminder">CreateReminder</string>
+
+    <string name="datepicker">DatePicker</string>
+    <string name="timepicker">TimePicker</string>
+    <string name="dateLabel">Date</string>
+    <string name="defaultRepeatVal">Does not repeat</string>
+    <string name="typeLabel">Reminder Type</string>
+    <string name="dateTimeLabel">Remind On</string>
+    <string name="noteLabel">Note</string>
+    <string name="remindLabel">Repeat</string>
+    <string name="alarmTypeLabel">Alarm Type</string>
+    <string name="createBtnLabel">Create</string>
+    <string name="atString">\@</string>
+    <string name="titleHint">Enter reminder title</string>
+    <string name="noteHint">Add note</string>
+
+    <string-array name="reminder_type">
+        <item>Task</item>
+        <item>WakeUp Call</item>
+        <item>Birthday</item>
+        <item>Payment</item>
+    </string-array>
+
+    <string-array name="alarm_type">
+        <item>Classic Alarm</item>
+        <item>Puzzle</item>
+        <item>Math</item>
+    </string-array>
+    <string name="title_activity_edit_reminder">EditReminder</string>
+    <string name="editSaveBtn">Save</string>
 </resources>

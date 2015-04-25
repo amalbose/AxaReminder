@@ -14,11 +14,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.axatrikx.axareminder.R;
 import com.axatrikx.axareminder.common.Utils;
 import com.axatrikx.axareminder.model.Reminder;
 import com.axatrikx.axareminder.adapters.NavDrawerAdapter;
+import com.axatrikx.axareminder.model.ReminderTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +70,6 @@ public class NavigatorDrawerFragment extends Fragment implements NavDrawerAdapte
         return layout;
     }
 
-
     public void setUp(int fragment_id, DrawerLayout drwrLayout, final Toolbar toolbar) {
         containerView = getActivity().findViewById(fragment_id);
         drawerLayout = drwrLayout;
@@ -104,14 +105,14 @@ public class NavigatorDrawerFragment extends Fragment implements NavDrawerAdapte
         });
     }
 
-    public static List<Reminder> getAppDrawerData() {
-        List<Reminder> data = new ArrayList<Reminder>();
+    public static List<ReminderTypes> getAppDrawerData() {
+        List<ReminderTypes> data = new ArrayList<ReminderTypes>();
         String[] titles = {"Home", "All Reminders", "Birthdays", "Settings"};
-        Reminder rem;
+        ReminderTypes rem;
         for (String title : titles) {
-            rem = new Reminder();
+            rem = new ReminderTypes();
             rem.setIconId(R.drawable.ic_launcher);
-            rem.setReminderName(title);
+            rem.setName(title);
             data.add(rem);
         }
         return data;
@@ -142,7 +143,9 @@ public class NavigatorDrawerFragment extends Fragment implements NavDrawerAdapte
                 .replace(R.id.content_fragment, fragment)
                 .commit();
 
-        fragmentManager.findFragmentById(R.id.content_fragment).getView().setBackgroundColor(Color.WHITE);
+        Fragment fgmt = fragmentManager.findFragmentById(R.id.content_fragment);
+        if (fgmt != null && fgmt.getView() != null)
+            fgmt.getView().setBackgroundColor(Color.WHITE);
 
         drawerLayout.closeDrawers();
     }

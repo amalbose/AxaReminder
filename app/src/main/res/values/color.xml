@@ -3,6 +3,7 @@
     <color name="primaryColor">#03A9F4</color>
     <color name="primaryColorDark">#01579B</color>
     <color name="accentColor">#F44336</color>
+    <color name="darkAccentColor">#ffaa0820</color>
     <color name="drawerBackground">#EEEEEE</color>
     <color name="appBackground">#FFFFFF</color>
 </resources>
